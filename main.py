@@ -102,7 +102,7 @@ embedder.save('sentence_transformer_model_300')
 # Example: Use the function to create a prompt
 # query = "What are the applications of predictive coding in auditory processing?"
 
-query = input("Enter your query: ")
-prompt = create_prompt(query)
-print("Generated Prompt for LLM:\n")
-print(prompt)
+# query = input("Enter your query: ")
+# prompt = create_prompt(query)
+# print("Generated Prompt for LLM:\n")
+# print(prompt)
