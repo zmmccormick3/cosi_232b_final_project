@@ -18,7 +18,7 @@ embedder = SentenceTransformer('sentence_transformer_model_300')
 
 ## if with LLaMa
 # Load LLaMA model (llama3.1)
-generator = pipeline("text-generation", model="llama3.1")  # Correct LLaMa model name
+generator = pipeline("text-generation", model="EleutherAI/gpt-neo-1.3B")  # Correct LLaMa model name
 
 
 
