@@ -44,6 +44,7 @@ def generate_answer(query, contexts):
     # result = generator(prompt, max_length=500, num_return_sequences=1, temperature=0.7, top_p=0.9)
     # Generate text using the GPT-Neo model
     result = generator(prompt, do_sample=True, min_length=50)  # Ensure do_sample is set to True for more diverse generation
+    print(result)
     return result[0]['generated_text']
 
 queries = [
