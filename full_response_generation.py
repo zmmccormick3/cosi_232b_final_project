@@ -101,7 +101,8 @@ while os.path.exists(filename):
 
 with open(filename, 'w') as out_file:
     for query in queries:
-        out_file.write(f"Query: {query}\n")
+        out_file.write(f"Write a detailed multi-sentence answer to the query below, based on the context.\nQuery: {query}\n")
+
         retrieved_passages = retrieve_passages(query, top_k=5)
         out_file.write("Context:\n")
         for passage in retrieved_passages:
