@@ -1,0 +1,9 @@
+query_results.txt
+- ran query_script.py
+- 50 neuroscience questions: 10 systems, 10 electrophysiology, 10 computational, 10 cognitive, 10 clinical
+- just gave top 5 articles relevant to the prompt; no response generation
+
+query_results_1.txt
+- ran full_response_generation.py
+- 50 neuroscience questions: 10 systems, 10 electrophysiology, 10 computational, 10 cognitive, 10 clinical
+- FLAN-T5 model for generation but only one-sentence responses
