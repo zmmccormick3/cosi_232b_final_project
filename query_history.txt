@@ -7,3 +7,17 @@ query_results_1.txt
 - ran full_response_generation.py
 - 50 neuroscience questions: 10 systems, 10 electrophysiology, 10 computational, 10 cognitive, 10 clinical
 - FLAN-T5 model for generation but only one-sentence responses
+  - do_sample=False (greedy decoding; always picking most probable next word)
+  - no temperature
+  - max_length = 200
+
+query_results_2.txt
+- ran full_response_generation.py
+- 50 neuroscience questions: 10 systems, 10 electrophysiology, 10 computational, 10 cognitive, 10 clinical
+- FLAN-T5 model for generation
+  - increased max_length; max_length = 500
+  - added "Write a detailed multi-sentence answer to the query below, based on the context" before query generation
+  - changes do_sample; do_sample = True
+  - temperature = 0.7 (to give a little randomness and pick less obvious next tokens)
+  - top_p = 0.9
+  - so: result = generator(prompt, max_length=500, do_sample=True, temperature=0.7, top_p=0.9)
