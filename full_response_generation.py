@@ -2,8 +2,9 @@ import json
 import faiss
 import numpy as np
 from sentence_transformers import SentenceTransformer
-from transformers import pipeline
+from transformers import pipeline, AutoTokenizer, AutoModelForCausalLM
 import os
+import torch    # for LLaMa
 
 # Load saved FAISS index and metadata
 index = faiss.read_index('faiss_index.index')
@@ -12,7 +13,16 @@ with open('metadata.json', 'r') as f:
 embedder = SentenceTransformer('sentence_transformer_model_300')
 
 # Load generation model
-generator = pipeline("text2text-generation", model="google/flan-t5-base")
+## if with FLAN
+# generator = pipeline("text2text-generation", model="google/flan-t5-base")
+
+## if with LLaMa
+# Load LLaMA model (llama-3-8b-instruct)
+tokenizer = AutoTokenizer.from_pretrained("meta-llama/Meta-Llama-3.1-8B-Instruct")  # Replace with the actual LLaMA model ID
+model = AutoModelForCausalLM.from_pretrained("meta-llama/Meta-Llama-3.1-8B-Instruct", torch_dtype=torch.bfloat16)
+# Initialize the pipeline for text generation
+generator = pipeline("text-generation", model=model, tokenizer=tokenizer, device=0)  # device=0 assumes you're using GPU, adjust to -1 if not
+
 
 def retrieve_passages(query, top_k=5):
     query_embedding = embedder.encode([query], convert_to_numpy=True)
@@ -29,7 +39,11 @@ def generate_answer(query, contexts):
     # Create a prompt
     prompt = f"Answer the following question based on the context provided.\n\nContext: {combined_context}\n\nQuestion: {query}\n\nAnswer:"
     # Generate
-    result = generator(prompt, max_length=500, do_sample=True, temperature=0.7, top_p=0.9)
+    ## if with FLAN
+    # result = generator(prompt, max_length=500, do_sample=True, temperature=0.7, top_p=0.9)
+    
+    ## if with LLaMa
+    result = generator(prompt, max_length=500, num_return_sequences=1, temperature=0.7, top_p=0.9)
     return result[0]['generated_text']
 
 queries = [
