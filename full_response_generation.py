@@ -29,7 +29,7 @@ def generate_answer(query, contexts):
     # Create a prompt
     prompt = f"Answer the following question based on the context provided.\n\nContext: {combined_context}\n\nQuestion: {query}\n\nAnswer:"
     # Generate
-    result = generator(prompt, max_length=500, do_sample=True)
+    result = generator(prompt, max_length=500, do_sample=True, temperature=0.7, top_p=0.9)
     return result[0]['generated_text']
 
 queries = [
