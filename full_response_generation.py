@@ -17,11 +17,9 @@ embedder = SentenceTransformer('sentence_transformer_model_300')
 # generator = pipeline("text2text-generation", model="google/flan-t5-base")
 
 ## if with LLaMa
-# Load LLaMA model (llama-3-8b-instruct)
-tokenizer = AutoTokenizer.from_pretrained("meta-llama/Meta-Llama-3.1-8B-Instruct")  # Replace with the actual LLaMA model ID
-model = AutoModelForCausalLM.from_pretrained("meta-llama/Meta-Llama-3.1-8B-Instruct", torch_dtype=torch.bfloat16)
-# Initialize the pipeline for text generation
-generator = pipeline("text-generation", model=model, tokenizer=tokenizer, device=0)  # device=0 assumes you're using GPU, adjust to -1 if not
+# Load LLaMA model (llama3.1)
+generator = pipeline("text-generation", model="llama3.1")  # Correct LLaMa model name
+
 
 
 def retrieve_passages(query, top_k=5):
