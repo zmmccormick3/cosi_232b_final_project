@@ -29,7 +29,6 @@ def retrieve_passages(query, top_k=5):
     for i in indices[0]:
         passage_info = metadata[i]
         results.append(f"Title: {passage_info['title']}\nAbstract: {passage_info['text']}\n")
-    print(results)
     return results
 
 def generate_answer(query, contexts):
